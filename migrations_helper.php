@@ -100,6 +100,15 @@ function create_table($table_name, $columns = array(), $options = array(), $if_n
 			// NOT NULL
 			$columns_sql .= isset($column['NOT_NULL']) ? " NOT NULL" : NULL;
 			
+			$default = isset($column['default']) ? $column['default'] : NULL;
+			
+			if ( $type == 'boolean' )
+			{
+				$default = $default ? 1 : 0;
+			}
+			
+			$columns_sql .= isset($default) ? " DEFAULT '{$default}'" : NULL;
+			
 			// AUTO INCREMENT
 			$columns_sql .= isset($column['AUTO_INCREMENT']) ? " AUTO_INCREMENT" : NULL;
 
